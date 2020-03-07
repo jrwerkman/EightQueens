@@ -66,7 +66,7 @@ void Grid::copy(Grid *gridToCopy)
 			set(x, y, gridToCopy->get(x, y));
 }
 
-const unsigned char Grid::get(const Coords &coord)
+const unsigned char& Grid::get(const Coords &coord)
 {
 	return get(coord.x, coord.y);
 }
@@ -76,7 +76,7 @@ void Grid::set(const Coords &coord, const unsigned char &type)
 	set(coord.x, coord.y, type);
 }
 
-const unsigned char Grid::get(const int &x, const int &y)
+const unsigned char& Grid::get(const int &x, const int &y)
 {
 	return grid[x][y];
 }

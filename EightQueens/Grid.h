@@ -17,10 +17,10 @@ public:
 	void reinit();
 	void copy(Grid *gridToCopy);
 
-	const unsigned char get(const Coords &coord);
+	const unsigned char& get(const Coords &coord);
 	void set(const Coords &coord, const unsigned char &type);
 
-	const unsigned char get(const int &x, const int &y);
+	const unsigned char& get(const int &x, const int &y);
 	void set(const int &x, const int &y, const unsigned char &type);
 
 	bool value(const Coords &coord, const unsigned char &type);

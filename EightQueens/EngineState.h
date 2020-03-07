@@ -14,7 +14,7 @@ public:
 	void reinit();
 	void prepare(const Coords &coord);
 private:
-	int getDimension();
+	int& getDimension();
 	bool checkNext(const int &state);
 	int getContinuationState(const int &state);
 	void init(const int &dim);

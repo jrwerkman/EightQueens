@@ -27,7 +27,7 @@ void EngineState::init(const int &dim)
 		states[i].init(dimension);
 }
 
-int EngineState::getDimension()
+int& EngineState::getDimension()
 {
 	return dimension;
 }
