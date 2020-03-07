@@ -1,18 +1,31 @@
 #include "stdafx.h"
-#include "BoardGrid.h"
 
-
-BoardGrid::BoardGrid()
+Grid::Grid()
 {
 }
 
-BoardGrid::BoardGrid(const int dim)
+Grid::Grid(const int &dim)
 {
 	init(dim);
 }
 
+Grid::Grid(const Grid &obj)
+{
+	dimension = obj.dimension;
 
-BoardGrid::~BoardGrid()
+	grid = new unsigned char*[dimension];
+
+	for (int i = 0; i < dimension; i++) {
+		grid[i] = new unsigned char[dimension];
+
+		for (int j = 0; j < dimension; j++)
+			grid[i][j] = obj.grid[i][j];
+	}
+
+	isInitialized = true;
+}
+
+Grid::~Grid()
 {
 	for (int i = 0; i < dimension; i++)
 		delete[] grid[i];
@@ -20,7 +33,7 @@ BoardGrid::~BoardGrid()
 	delete[] grid;
 }
 
-void BoardGrid::init(const int dim)
+void Grid::init(const int &dim)
 {
 	if (isInitialized)
 		return;
@@ -39,56 +52,56 @@ void BoardGrid::init(const int dim)
 	isInitialized = true;
 }
 
-void BoardGrid::reinit()
+void Grid::reinit()
 {
 	for (int i = 0; i < dimension; i++)
 		for (int j = 0; j < dimension; j++)
 			grid[i][j] = AVAILABLE;
 }
 
-void BoardGrid::copy(BoardGrid *gridToCopy)
+void Grid::copy(Grid *gridToCopy)
 {
 	for (int x = 0; x < dimension; x++)
 		for (int y = 0; y < dimension; y++)
 			set(x, y, gridToCopy->get(x, y));
 }
 
-const unsigned char BoardGrid::get(const Coords coord)
+const unsigned char Grid::get(const Coords &coord)
 {
 	return get(coord.x, coord.y);
 }
 
-void BoardGrid::set(const Coords coord, const unsigned char type)
+void Grid::set(const Coords &coord, const unsigned char &type)
 {
 	set(coord.x, coord.y, type);
 }
 
-const unsigned char BoardGrid::get(const int x, const int y)
+const unsigned char Grid::get(const int &x, const int &y)
 {
 	return grid[x][y];
 }
 
-void BoardGrid::set(const int x, const int y, const unsigned char type)
+void Grid::set(const int &x, const int &y, const unsigned char &type)
 {
 	grid[x][y] = type;
 }
 
-bool BoardGrid::value(const Coords coord, const unsigned char type)
+bool Grid::value(const Coords &coord, const unsigned char &type)
 {
 	return value(coord.x, coord.y, type);
 }
 
-bool BoardGrid::value(const int x, const int y, const unsigned char type)
+bool Grid::value(const int &x, const int &y, const unsigned char &type)
 {
 	return get(x, y) == type;
 }
 
-void BoardGrid::print()
+void Grid::print()
 {
 	print(false);
 }
 
-void BoardGrid::print(bool debug)
+void Grid::print(bool debug)
 {
 	for (int x = 0; x < dimension; x++) {
 		for (int y = 0; y < dimension; y++) {

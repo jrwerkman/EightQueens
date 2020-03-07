@@ -1,40 +1,38 @@
 #include "stdafx.h"
-#include "Board.h"
-#include "BoardState.h"
 
-Board::Board()
+EngineState::EngineState()
 {
 	init(DEFAULT_BOARD_SIZE);
 }
 
-Board::Board(const int dim)
+EngineState::EngineState(const int &dim)
 {
 	init(dim);
 }
 
-Board::~Board()
+EngineState::~EngineState()
 {
 	if(states != nullptr)
 		delete[] states;
 }
 
-void Board::init(const int dim)
+void EngineState::init(const int &dim)
 {
 	dimension = dim;
 	numberOfStates = dim + 1;
 
-	states = new BoardState[numberOfStates];
+	states = new State[numberOfStates];
 
 	for (int i = 0; i < numberOfStates; i++)
 		states[i].init(dimension);
 }
 
-int Board::getDimension()
+int EngineState::getDimension()
 {
 	return dimension;
 }
 
-bool Board::checkNext(const int state)
+bool EngineState::checkNext(const int &state)
 {
 	int row = state - 1;
 	bool success = false;
@@ -49,7 +47,7 @@ bool Board::checkNext(const int state)
 	return success;
 }
 
-int Board::getContinuationState(const int state)
+int EngineState::getContinuationState(const int &state)
 {
 	for (int i = state; i > 0; i--)
 		if (i != 0 && states[i-1].isRowPossible(i-1))
@@ -58,7 +56,7 @@ int Board::getContinuationState(const int state)
 	return 0;
 }
 
-void Board::findSolution() {
+void EngineState::findSolution() {
 	bool foundSolution = true;
 
 	for (int state = 1; state < numberOfStates; state++) {
@@ -85,13 +83,13 @@ void Board::findSolution() {
 		states[numberOfStates - 1].getGrid()->print();
 }
 
-void Board::reinit()
+void EngineState::reinit()
 {
 	for (int i = 0; i < numberOfStates; i++)
 		states[i].getGrid()->reinit();
 }
 
-void Board::prepare(const Coords coord)
+void EngineState::prepare(const Coords &coord)
 {
 	reinit();
 

@@ -147,20 +147,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BoardGrid.h" />
-    <ClInclude Include="BoardState.h" />
+    <ClInclude Include="EngineBrute.h" />
+    <ClInclude Include="Grid.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="Coords.h" />
-    <ClInclude Include="Board.h" />
-    <ClInclude Include="Boards.h" />
+    <ClInclude Include="EngineState.h" />
+    <ClInclude Include="Engine.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BoardGrid.cpp" />
+    <ClCompile Include="EngineBrute.cpp" />
+    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="EightQueens.cpp" />
-    <ClCompile Include="BoardState.cpp" />
-    <ClCompile Include="Board.cpp" />
-    <ClCompile Include="Boards.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="EngineState.cpp" />
+    <ClCompile Include="Engine.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

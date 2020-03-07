@@ -1,26 +1,26 @@
 #include "stdafx.h"
 
-BoardState::BoardState()
+State::State()
 {
 
 }
 
-BoardState::BoardState(const int dim)
+State::State(const int &dim)
 {
 	grid.init(dim);
 }
 
-BoardState::~BoardState()
+State::~State()
 {
 }
 
-void BoardState::init(const int dim)
+void State::init(const int &dim)
 {
 	dimension = dim;
 	grid.init(dim);
 }
 
-void BoardState::copy(BoardState *boardStateToCopy)
+void State::copy(State *boardStateToCopy)
 {
 	dimension = boardStateToCopy->dimension;
 	lastCoords = boardStateToCopy->lastCoords;
@@ -28,7 +28,7 @@ void BoardState::copy(BoardState *boardStateToCopy)
 }
 
 
-bool BoardState::addQueen(const Coords coord)
+bool State::addQueen(const Coords &coord)
 {
 	if (coord.x >= dimension || coord.y >= dimension)
 		return false;
@@ -45,22 +45,22 @@ bool BoardState::addQueen(const Coords coord)
 }
 
 
-void BoardState::addNotPossible(const Coords coord)
+void State::addNotPossible(const Coords &coord)
 {
 	grid.set(coord, NOT_POSSIBLE);
 }
 
-Coords BoardState::getLastCoords()
+Coords State::getLastCoords()
 {
 	return lastCoords;
 }
 
-BoardGrid* BoardState::getGrid()
+Grid* State::getGrid()
 {
 	return &grid;
 }
 
-bool BoardState::isRowPossible(const int row)
+bool State::isRowPossible(const int &row)
 {
 	if (row == dimension)
 		return false;
@@ -72,7 +72,7 @@ bool BoardState::isRowPossible(const int row)
 	return false;
 }
 
-bool BoardState::isThereHope(const int row)
+bool State::isThereHope(const int &row)
 {
 	if (row == dimension)
 		return false;
@@ -85,7 +85,7 @@ bool BoardState::isThereHope(const int row)
 	return amountUnavailable != dimension;
 }
 
-void BoardState::addUnavailable(const Coords coord)
+void State::addUnavailable(const Coords &coord)
 {
 	addHorizontalUnavailable(coord);
 	addVerticalUnavailable(coord, 1, 1);
@@ -94,7 +94,7 @@ void BoardState::addUnavailable(const Coords coord)
 	addVerticalUnavailable(coord, -1, -1);
 }
 
-void BoardState::addHorizontalUnavailable(const Coords coord)
+void State::addHorizontalUnavailable(const Coords &coord)
 {
 	for (int i = 0; i < dimension; i++) {
 		if (grid.value(coord.x, i, AVAILABLE))
@@ -105,7 +105,7 @@ void BoardState::addHorizontalUnavailable(const Coords coord)
 	}
 }
 
-void BoardState::addVerticalUnavailable(const Coords coord, const int x, const int y)
+void State::addVerticalUnavailable(const Coords &coord, const int &x, const int &y)
 {
 	int addX = 0;
 	int addY = 0;
