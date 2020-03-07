@@ -10,13 +10,13 @@ public:
 	EngineState(const int &dim);
 	~EngineState();
 
-	void findSolution();
+	Grid* findSolution();
 	void reinit();
 	void prepare(const Coords &coord);
 private:
 	int& getDimension();
 	bool checkNext(const int &state);
-	int getContinuationState(const int &state);
+	int getContinuationState(const int &currentState);
 	void init(const int &dim);
 };
 

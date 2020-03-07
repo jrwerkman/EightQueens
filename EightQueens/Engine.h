@@ -2,6 +2,7 @@
 class Engine
 {
 	int dimension;
+	GridList *gridList;
 public:
 	Engine();
 	Engine(const int &dim);
@@ -13,5 +14,9 @@ public:
 	void stateFindMany();
 	void bruteFindOne();
 	void bruteFindMany();
+	void print();
+	const int results();
+private:
+	void init(const int &dim);
 };
 

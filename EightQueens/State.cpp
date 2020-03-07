@@ -50,6 +50,16 @@ void State::addNotPossible(const Coords &coord)
 	grid.set(coord, NOT_POSSIBLE);
 }
 
+/*
+	Adds a restriction to a field, by making all field needed for a 
+	queen in that possition NOT_POSSIBLE
+ */
+void State::addRestriction(const Coords & coord)
+{
+	addState(coord, NOT_POSSIBLE);
+	grid.set(coord, AVAILABLE);
+}
+
 Coords State::getLastCoords()
 {
 	return lastCoords;
@@ -87,25 +97,30 @@ bool State::isThereHope(const int &row)
 
 void State::addUnavailable(const Coords &coord)
 {
-	addHorizontalUnavailable(coord);
-	addVerticalUnavailable(coord, 1, 1);
-	addVerticalUnavailable(coord, 1, -1);
-	addVerticalUnavailable(coord, -1, 1);
-	addVerticalUnavailable(coord, -1, -1);
+	addState(coord, UNAVAILABLE);
 }
 
-void State::addHorizontalUnavailable(const Coords &coord)
+void State::addState(const Coords & coord, unsigned char type)
+{
+	addHorizontalUnavailable(coord, type);
+	addVerticalUnavailable(coord, type, 1, 1);
+	addVerticalUnavailable(coord, type, 1, -1);
+	addVerticalUnavailable(coord, type, -1, 1);
+	addVerticalUnavailable(coord, type, -1, -1);
+}
+
+void State::addHorizontalUnavailable(const Coords &coord, unsigned char &type)
 {
 	for (int i = 0; i < dimension; i++) {
 		if (grid.value(coord.x, i, AVAILABLE))
-			grid.set(coord.x, i, UNAVAILABLE);
+			grid.set(coord.x, i, type);
 
 		if (grid.value(i, coord.y, AVAILABLE))
-			grid.set(i, coord.y, UNAVAILABLE);
+			grid.set(i, coord.y, type);
 	}
 }
 
-void State::addVerticalUnavailable(const Coords &coord, const int &x, const int &y)
+void State::addVerticalUnavailable(const Coords &coord, unsigned char &type, const int &x, const int &y)
 {
 	int addX = 0;
 	int addY = 0;
@@ -116,15 +131,10 @@ void State::addVerticalUnavailable(const Coords &coord, const int &x, const int 
 
 		Coords newCoords(coord.x + addX, coord.y + addY);
 
-		// TODO
-		// TODO
-		// TODO
-		// TODO
-		// TODO
 		if (!newCoords.inSquare(dimension))
 			break;
 
 		if (grid.value(newCoords, AVAILABLE))
-			grid.set(newCoords, UNAVAILABLE);
+			grid.set(newCoords, type);
 	}
 }

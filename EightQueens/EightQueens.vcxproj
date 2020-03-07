@@ -149,6 +149,8 @@
   <ItemGroup>
     <ClInclude Include="EngineBrute.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="GridList.h" />
+    <ClInclude Include="Results.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="Coords.h" />
     <ClInclude Include="EngineState.h" />
@@ -160,6 +162,7 @@
     <ClCompile Include="EngineBrute.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="EightQueens.cpp" />
+    <ClCompile Include="Results.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="EngineState.cpp" />
     <ClCompile Include="Engine.cpp" />

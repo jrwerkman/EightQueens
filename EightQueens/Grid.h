@@ -26,6 +26,8 @@ public:
 	bool value(const Coords &coord, const unsigned char &type);
 	bool value(const int &x, const int &y, const unsigned char &type);
 
+	bool compare(const Grid &obj);
+
 	void print();
 	void print(bool debug);
 };

@@ -1,20 +1,18 @@
 #include "stdafx.h"
 
-
 Engine::Engine()
 {
-	dimension = DEFAULT_BOARD_SIZE;
+	init(DEFAULT_BOARD_SIZE);
 }
 
 Engine::Engine(const int &dim)
 {
-	dimension = dim;
+	init(dim);
 }
-
 
 Engine::~Engine()
 {
-
+	delete gridList;
 }
 
 void Engine::setDimension(const int &dim)
@@ -30,7 +28,10 @@ const int& Engine::getDimension()
 void Engine::stateFindOne()
 {
 	EngineState engineState(dimension);
-	engineState.findSolution();
+	Grid* gridResult = engineState.findSolution();
+
+	if (gridResult != nullptr)
+		gridList->insertEnd(*gridResult);
 }
 
 void Engine::stateFindMany()
@@ -42,7 +43,10 @@ void Engine::stateFindMany()
 		int y = variation % dimension;
 
 		engineState.prepare(Coords(x, y));
-		engineState.findSolution();
+		Grid* gridResult = engineState.findSolution();
+
+		if (gridResult != nullptr)
+			gridList->insertEnd(*gridResult);
 	}
 }
 
@@ -52,4 +56,22 @@ void Engine::bruteFindOne()
 
 void Engine::bruteFindMany()
 {
+	EngineBrute engineBrute(dimension);
+
+	engineBrute.findSolution();
+}
+
+void Engine::print() {
+	for (int i = 0; i < gridList->size(); i++)
+		gridList->get(i)->print();
+}
+
+const int Engine::results()
+{
+	return gridList->size();
+}
+
+void Engine::init(const int &dim) {
+	gridList = new GridList();
+	dimension = dim;
 }

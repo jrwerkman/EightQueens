@@ -96,6 +96,16 @@ bool Grid::value(const int &x, const int &y, const unsigned char &type)
 	return get(x, y) == type;
 }
 
+bool Grid::compare(const Grid & obj)
+{
+	for (int x = 0; x < dimension; x++) 
+		for (int y = 0; y < dimension; y++) 
+			if (grid[x][y] == QUEEN && grid[x][y] != obj.grid[x][y])
+				return false;
+
+	return true;
+}
+
 void Grid::print()
 {
 	print(false);
@@ -103,8 +113,10 @@ void Grid::print()
 
 void Grid::print(bool debug)
 {
-	for (int x = 0; x < dimension; x++) {
-		for (int y = 0; y < dimension; y++) {
+	for (int x = 0; x < dimension; x++) 
+	{
+		for (int y = 0; y < dimension; y++) 
+		{
 			unsigned char element = grid[x][y];
 
 			if (!debug && element == NOT_POSSIBLE)

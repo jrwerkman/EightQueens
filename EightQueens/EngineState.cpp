@@ -47,16 +47,16 @@ bool EngineState::checkNext(const int &state)
 	return success;
 }
 
-int EngineState::getContinuationState(const int &state)
+int EngineState::getContinuationState(const int &currentState)
 {
-	for (int i = state; i > 0; i--)
-		if (i != 0 && states[i-1].isRowPossible(i-1))
-			return i-1;
+	for (int i = currentState - 1; i > 0; i--)
+		if (i != 0 && states[i].isRowPossible(i))
+			return i;
 
 	return 0;
 }
 
-void EngineState::findSolution() {
+Grid* EngineState::findSolution() {
 	bool foundSolution = true;
 
 	for (int state = 1; state < numberOfStates; state++) {
@@ -80,7 +80,9 @@ void EngineState::findSolution() {
 	}
 
 	if (foundSolution)
-		states[numberOfStates - 1].getGrid()->print();
+		return states[numberOfStates - 1].getGrid();
+
+	return nullptr;
 }
 
 void EngineState::reinit()
@@ -92,11 +94,7 @@ void EngineState::reinit()
 void EngineState::prepare(const Coords &coord)
 {
 	reinit();
-
-	for (int i = 0; i < dimension; i++)
-		if (i != coord.y)
-			states[0].addNotPossible(Coords(coord.x, i));
-
+	states[0].addRestriction(coord);
 	states[1].copy(&states[0]);
 }
 
