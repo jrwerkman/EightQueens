@@ -25,13 +25,10 @@ const int& Engine::getDimension()
 	return dimension;
 }
 
-void Engine::stateFindOne()
+void Engine::stateFind()
 {
 	EngineState engineState(dimension);
-	Grid* gridResult = engineState.findSolution();
-
-	if (gridResult != nullptr)
-		gridList->insertEnd(*gridResult);
+	engineState.findSolution(gridList);
 }
 
 void Engine::stateFindMany()
@@ -43,22 +40,15 @@ void Engine::stateFindMany()
 		int y = variation % dimension;
 
 		engineState.prepare(Coords(x, y));
-		Grid* gridResult = engineState.findSolution();
-
-		if (gridResult != nullptr)
-			gridList->insertEnd(*gridResult);
+		engineState.findSolution(gridList);
 	}
 }
 
-void Engine::bruteFindOne()
-{
-}
-
-void Engine::bruteFindMany()
+void Engine::bruteFind()
 {
 	EngineBrute engineBrute(dimension);
 
-	engineBrute.findSolution();
+	engineBrute.findSolution(gridList);
 }
 
 void Engine::print() {

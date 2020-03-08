@@ -10,7 +10,7 @@ public:
 	EngineState(const int &dim);
 	~EngineState();
 
-	Grid* findSolution();
+	void findSolution(GridList * list);
 	void reinit();
 	void prepare(const Coords &coord);
 private:

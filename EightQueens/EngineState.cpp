@@ -56,7 +56,7 @@ int EngineState::getContinuationState(const int &currentState)
 	return 0;
 }
 
-Grid* EngineState::findSolution() {
+void EngineState::findSolution(GridList * list) {
 	bool foundSolution = true;
 
 	for (int state = 1; state < numberOfStates; state++) {
@@ -80,9 +80,7 @@ Grid* EngineState::findSolution() {
 	}
 
 	if (foundSolution)
-		return states[numberOfStates - 1].getGrid();
-
-	return nullptr;
+		list->insertEnd(*states[numberOfStates - 1].getGrid());
 }
 
 void EngineState::reinit()

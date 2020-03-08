@@ -14,14 +14,15 @@ EngineBrute::EngineBrute(const int &dim)
 
 EngineBrute::~EngineBrute()
 {
-	delete grid;
+	//delete gridList;
 	delete possitions;
+	delete state;
 }
 
-void EngineBrute::findSolution()
+void EngineBrute::findSolution(GridList * list)
 {
-	//loopCombinations();
-
+	permutation(list, possitions, 0, dimension-1);
+	/*
 	int n = dimension;
 	int k = dimension;
 	int row, col;
@@ -39,31 +40,64 @@ void EngineBrute::findSolution()
 		}
 		printf("\n");
 	}
+	*/
 }
 
 void EngineBrute::init(const int & dim)
 {
 	dimension = dim;
-	grid = new Grid(dimension);
+	//gridList = new GridList();
+	state = new State(dimension);
 	generatePositions();
 }
 
 void EngineBrute::generatePositions()
 {
-	// todo change to short int array witch stores the possition of the queen
-	possitions = new short int[dimension];
+	possitions = new int[dimension];
 
 	for (int i = 0; i < dimension; i++) 
 		possitions[i] = i;
 
 }
 
-void EngineBrute::loopCombinations()
+//https://www.codesdope.com/blog/article/generating-permutations-of-all-elements-of-an-arra/ 
+//function to swap the variables
+void EngineBrute::swap(int *a, int *b)
 {
-	// https://www.codesdope.com/blog/article/generating-permutations-of-all-elements-of-an-arra/
+	int temp;
+	temp = *a;
+	*a = *b;
+	*b = temp;
 }
 
-void EngineBrute::loopCombinations(short int data[], int start, int end, int index, int r)
+//permutation function
+void EngineBrute::permutation(GridList * list, int *arr, int start, int end)
 {
+	if (start == end)
+	{
+		check(list, arr);
+		return;
+	}
+	int i;
+	for (i = start; i <= end; i++)
+	{
+		//swapping numbers
+		swap((arr + i), (arr + start));
+		//fixing one first digit
+		//and calling permutation on
+		//the rest of the digits
+		permutation(list, arr, start + 1, end);
+		swap((arr + i), (arr + start));
+	}
+}
 
+void EngineBrute::check(GridList * list, int arr[])
+{
+	state->getGrid()->reinit();
+
+	for (int i = 0; i < dimension; i++)
+		if (!state->addQueen(Coords(i, arr[i])))
+			return;
+
+	list->insertEnd(*state->getGrid());
 }

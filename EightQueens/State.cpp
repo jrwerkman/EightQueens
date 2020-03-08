@@ -7,7 +7,7 @@ State::State()
 
 State::State(const int &dim)
 {
-	grid.init(dim);
+	init(dim);
 }
 
 State::~State()

@@ -10,10 +10,9 @@ public:
 
 	void setDimension(const int &dim);
 	const int& getDimension();
-	void stateFindOne();
+	void stateFind();
 	void stateFindMany();
-	void bruteFindOne();
-	void bruteFindMany();
+	void bruteFind();
 	void print();
 	const int results();
 private:

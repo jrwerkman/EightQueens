@@ -2,18 +2,20 @@
 class EngineBrute
 {
 	int dimension = 0;
-	Grid * grid;
-	short int * possitions;
+	//GridList * gridList;
+	State *state;
+	int * possitions;
 public:
 	EngineBrute();
 	EngineBrute(const int &dim);
 	~EngineBrute();
 
-	void findSolution();
+	void findSolution(GridList * list);
 private:
 	void init(const int &dim);
 	void generatePositions();
-	void loopCombinations();
-	void loopCombinations(short int data[], int start, int end, int index, int r);
+	void swap(int *a, int *b);
+	void permutation(GridList * list, int *arr, int start, int end);
+	void check(GridList * list, int arr[]);
 };
 
