@@ -2,11 +2,16 @@
 
 EngineState::EngineState()
 {
+	currentState = 0;
+	numberOfStates = 0;
+	dimension = 0;
+	states = nullptr;
 	init(DEFAULT_BOARD_SIZE);
 }
 
 EngineState::EngineState(const int &dim)
 {
+	currentState = 0;
 	init(dim);
 }
 

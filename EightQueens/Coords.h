@@ -1,7 +1,10 @@
 #pragma once
 struct Coords
 {
-	Coords() {};
+	Coords() {
+	  x = 0;
+	  y = 0;
+	};
 
 	Coords(int x, int y) {
 		this->x = x;
@@ -17,6 +20,6 @@ struct Coords
 		return x < dim && y < dim && x >= 0 && y >= 0;
 	}
 
-	int x = 0;
-	int y = 0;
+	int x;
+	int y;
 };

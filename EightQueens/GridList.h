@@ -8,11 +8,12 @@ struct GridNode {
 class GridList
 {
 	GridNode *node;
-	bool isCreated = false;
-	int m_size = 0;
+	bool isCreated;
+	int m_size;
 public:
 	GridList() {
-
+		isCreated = false;
+		m_size = 0;
 	}
 
 	~GridList() {

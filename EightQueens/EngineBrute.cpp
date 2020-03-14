@@ -4,6 +4,7 @@
 
 EngineBrute::EngineBrute()
 {
+	dimension = 0;
 	init(DEFAULT_BOARD_SIZE);
 }
 

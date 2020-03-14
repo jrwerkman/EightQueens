@@ -2,6 +2,7 @@
 
 Grid::Grid()
 {
+	isInitialized = false;
 }
 
 Grid::Grid(const int &dim)

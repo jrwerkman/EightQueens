@@ -4,7 +4,7 @@
 
 class Grid
 {
-	bool isInitialized = false;
+	bool isInitialized;
 	unsigned char **grid;
 	int dimension;
 public:

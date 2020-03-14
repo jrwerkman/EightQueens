@@ -1,7 +1,7 @@
 #pragma once
 class EngineBrute
 {
-	int dimension = 0;
+	int dimension;
 	//GridList * gridList;
 	State *state;
 	int * possitions;

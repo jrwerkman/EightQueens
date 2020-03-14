@@ -1,10 +1,10 @@
 #pragma once
 class EngineState
 {
-	int currentState = 0;
-	int numberOfStates = 0;
-	int dimension = 0;
-	State *states = nullptr;
+	int currentState;
+	int numberOfStates;
+	int dimension;
+	State *states;
 public:
 	EngineState();
 	EngineState(const int &dim);
